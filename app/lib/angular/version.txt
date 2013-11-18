@@ -1,0 +1,2 @@
+1.2.1
+angular-scenario.js and angular-mocks.js were used for test,just put it here
