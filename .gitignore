@@ -2,7 +2,7 @@
 
 ### PhPStorm ###
 .idea/
-.dist/
+dist/
 
 ### Node ###
 lib-cov

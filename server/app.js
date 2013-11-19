@@ -15,13 +15,16 @@ app.set('port', process.env.PORT || 3000);
 //app.set('views', path.join(__dirname, 'views'));
 //app.set('view engine', 'jade');
 app.use(express.favicon());
-app.use(express.logger('dev'));
+
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, './../app')));
 
+//move logger here,then all logger of request from static won't show
+//we set it before errorHandle,so all error will display
+app.use(express.logger('dev'));
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
