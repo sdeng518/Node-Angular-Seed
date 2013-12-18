@@ -6,6 +6,12 @@
     安装angular.js和markdown插件。去掉无关插件和liveTemplate，以提高运行效率。
     日常开发，我们使用四个运行配置，分别对应启动服务器、运行前端测试、运行前端e2e测试、运行服务端测试，仅在发布运行版本
     时，我们在Webstorm的terminal窗口中执行grunt任务。
+#服务端日常开发,简单的在webstorm中运行单元测试，方法是：
+    npm install jasmine-node -g
+    在Webstorm中，Run|Edit Confugration|增加一个node.js配置
+    js文件输入jasmine的文件：C:\Users\Administrator\AppData\Roaming\npm\node_modules\jasmine-node\bin\jasmine-node
+    application parameter输入测试文件所在的文件夹，比如：./server/test --verbose
+    项目的测试在test目录，一些尝试在demo目录。因此我们有server test和server demo两个单元测试配置。
 
 ##获取node-angular-seed
 
