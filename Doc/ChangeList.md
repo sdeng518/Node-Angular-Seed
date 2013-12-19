@@ -1,4 +1,7 @@
 
+##20131219 ChangeLog
+    Add Q Promise demo at server side
+
 ##20131119 ChangeLog
     修复indexAsync.html运行错误，加入其所需的angular map文件。调整use logger位置，运行时不再显示静态文件web请求的log
     但错误log仍然显示。
