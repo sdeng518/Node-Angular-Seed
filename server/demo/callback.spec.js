@@ -108,8 +108,8 @@ describe("promise demo", function () {
         cbLogin('王麻子','1',function(err,data)
         {
             //键值对的键不存在，为undefine
-            if (!users['王麻子'])
-                console.log('undefine类型为false')
+            //if (!users['王麻子'])
+            //    console.log('undefine类型为false')
             expect(data).toEqual(false);
             expect(err).toEqual('user王麻子 not exist');
             done();
@@ -144,6 +144,24 @@ describe("promise demo", function () {
         cbHandle('李四','1',function(err,data)
         {
             expect(err).toEqual('you have more then 10T')
+            expect(data).toEqual('fail')
+            done();
+        })
+    })
+
+    it("cbHandle test:if user not exist,should be changed fail", function (done) {
+        cbHandle('王麻子','1',function(err,data)
+        {
+            expect(err).toEqual('user王麻子 not exist')
+            expect(data).toEqual('fail')
+            done();
+        })
+    })
+
+    it("cbHandle test:if password invelid,should changed fail", function (done) {
+        cbHandle('张三','2',function(err,data)
+        {
+            expect(err).toEqual('password invalid')
             expect(data).toEqual('fail')
             done();
         })
