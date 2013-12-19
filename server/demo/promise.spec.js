@@ -59,7 +59,9 @@ it("login test:if users not exist,login should fail", function (done) {
     })
 })
 
-//测试promise分成两次获取结果
+//测试then
+//then本身返回promise，其响应了前面的成功、失败信息之后，后续的then将被忽略
+//因此，只要链中有一个响应失败的回调，总会处理失败，处理完毕后失败不再被处理，除非我们手工的将失败信息下传
     it("login test:响应拒绝信息之后，流程结束。拒绝之后，响应成功的情形被忽略", function (done) {
         login('王麻子','1')
         .then(function(data){   //第一次调用，只响应成功结果，由于拒绝，这里没有处理
@@ -75,13 +77,13 @@ it("login test:if users not exist,login should fail", function (done) {
 
             //只有手工的将拒绝传下去，下面的拒绝才会处理
             var deferred= q.defer()
-            deferred.reject(data)
+            deferred.reject('error')
             return deferred.promise;
         })
         .then(null,function(data)  //第三次调用，响应失败的结果，由于前面已经拒绝，这里同样不再执行。但我们上面重新传出拒绝信号，这里才能响应
         {
             console.log('第三次调用响应拒绝信息')
-            expect(data).toEqual('user王麻子 not exist');
+            expect(data).toEqual('error');
             done();
         })
     })
