@@ -71,12 +71,21 @@ function handle(user,password,cb)
    return login(user,password)
        .then(function(data)
        {
-           find(user) //此处简单的执行，没有return，则信息处理了不会下传
+          return find(user) //此处简单的执行，若没有return，则信息处理了不会下传，由于下方要根据data判断是否change，这里return
        })
        .then(function(data)
        {
+           if (data<10)
            //注意，最后一步我们将change return，则其已经获得解决的信息可以返回，注意我们是在"成功方法"中return的
            return change(user)
+
+           //虽然是成功的回调函数，但我们可以返回一个拒绝的promise
+           else
+           {
+               var deferred= q.defer()
+               deferred.reject("you have more then 10T")
+               return deferred.promise;
+           }
        })
        //由于上面的then 串中我们未处理拒绝信息，因此，拒绝信息将由handle传递出去
 }
@@ -141,6 +150,14 @@ it("handle test:first user should be changed success", function (done) {
     handle('张三','1').then(function(data)
     {
         expect(data).toEqual('success')
+        done();
+    })
+})
+
+it("handle test:second user should be changed fail", function (done) {
+    handle('李四','1').then(null,function(err)
+    {
+        expect(err).toEqual('you have more then 10T')
         done();
     })
 })

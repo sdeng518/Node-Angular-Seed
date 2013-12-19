@@ -84,7 +84,7 @@ function cbHandle(user,password,cb)
     })
 }
 
-describe("promise demo", function () {
+describe("callback demo", function () {
 
     it("cblogin test:if user exist and password ok,login should success", function (done) {
         cbLogin('张三','1',function(err,data)
